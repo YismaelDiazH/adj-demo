@@ -23,9 +23,11 @@ services:
         API_BASE: /adj-api
     container_name: adj-client
     ports:
-      - "3000:80"
+      - "3000:443"
     networks:
       - adj-net
+    volumes:
+      - certbot-conf:/etc/letsencrypt:ro
     restart: unless-stopped
     depends_on:
       - database
@@ -46,6 +48,8 @@ services:
       - "8081:8080"
     networks:
       - adj-net
+    volumes:
+      - certbot-conf:/etc/letsencrypt:ro
     depends_on:
       - frontend
 
